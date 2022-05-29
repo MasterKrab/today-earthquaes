@@ -1,39 +1,41 @@
+import type EarthQuakesProperties from 'types/earth-quake-properties'
 import getEarthquakes from 'lib/get-earthquakes'
 import leaflet from 'leaflet'
 import getMagnitudeColor from 'utils/get-magnitude-color'
 import formatList from 'utils/format-list'
 
-const earthquakes = await getEarthquakes()
+const getGeoJson = async () => {
+	const earthquakes = await getEarthquakes()
 
-const geojson = leaflet.geoJSON(earthquakes, {
-	pointToLayer: ({ properties }, latlng) => {
-		const {
-			mag: magnitude,
-			magType,
-			status,
-			title,
-			place,
-			tsunami,
-			type,
-			time,
-			types,
-			updated,
-			url
-		} = properties
+	const geojson = leaflet.geoJSON<EarthQuakesProperties>(earthquakes, {
+		pointToLayer: ({ properties }, latlng) => {
+			const {
+				mag: magnitude,
+				magType,
+				status,
+				title,
+				place,
+				tsunami,
+				type,
+				time,
+				types,
+				updated,
+				url
+			} = properties
 
-		const color = getMagnitudeColor(magnitude)
+			const color = getMagnitudeColor(magnitude)
 
-		const circle = leaflet.circleMarker(latlng, {
-			radius: magnitude * 5,
-			color: color,
-			fillColor: color,
-			fillOpacity: 0.25
-		})
+			const circle = leaflet.circleMarker(latlng, {
+				radius: magnitude * 5,
+				color: color,
+				fillColor: color,
+				fillOpacity: 0.25
+			})
 
-		const date = new Date(time)
-		const updatedDate = new Date(updated)
+			const date = new Date(time)
+			const updatedDate = new Date(updated)
 
-		const html = `
+			const html = `
 				<article class="information">
 					<h2 class="information__title">${title}</h3>
 					<ul class="information__list" tabindex="0">
@@ -87,10 +89,13 @@ const geojson = leaflet.geoJSON(earthquakes, {
 				</article>
 			`
 
-		circle.bindPopup(html)
+			circle.bindPopup(html)
 
-		return circle
-	}
-})
+			return circle
+		}
+	})
 
-export default geojson
+	return geojson
+}
+
+export default getGeoJson
