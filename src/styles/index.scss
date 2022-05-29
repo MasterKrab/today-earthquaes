@@ -1,0 +1,91 @@
+@use 'normalize';
+
+$font-primary: 'Poppins', sans-serif;
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+html {
+	font-family: $font-primary;
+	box-sizing: border-box;
+}
+
+.map {
+	height: 100vh;
+}
+
+.title {
+	background-color: rgba(255, 255, 255, 0.75);
+	font-size: 1rem;
+	font-family: $font-primary;
+	padding: 0.5rem 1.15rem;
+	border-radius: 0.5rem;
+	box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25);
+}
+
+.information {
+	font-family: $font-primary;
+	font-size: 0.75rem;
+
+	&__title {
+		font-size: 0.9rem;
+		padding-bottom: 0.5rem;
+		border-bottom: 1px solid #000;
+	}
+
+	&__list,
+	&__sublist {
+		display: grid;
+		gap: 0.35rem;
+		list-style: none;
+		padding-left: 0;
+	}
+
+	&__list {
+		max-height: 8rem;
+		overflow-y: auto;
+
+		&:focus-visible {
+			outline-offset: 0.25rem;
+		}
+
+		&::-webkit-scrollbar {
+			width: 0.25rem;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: #000;
+		}
+	}
+
+	&__name {
+		font-weight: bold;
+	}
+
+	&__subtitle {
+		font-size: 0.8rem;
+		margin-top: 0.25rem;
+		margin-bottom: 0.25rem;
+	}
+
+	&__sublist {
+		padding-left: 0.5rem;
+		margin-bottom: 0.5rem;
+	}
+
+	&__link {
+		display: block;
+		font-size: 0.8rem;
+		text-align: center;
+		text-decoration: none;
+		padding: 0.5rem;
+		border: 1px solid #0078a8;
+	}
+}
+
+.leaflet-container {
+	background-color: #000;
+}
