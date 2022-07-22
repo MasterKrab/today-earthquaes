@@ -1,6 +1,9 @@
 @use 'normalize';
 
 $font-primary: 'Poppins', sans-serif;
+$background-color: rgba(#fff, 0.75);
+$box-shadow: 0 0 0.5rem rgba(#000, 0.25);
+$border-radius: 0.25rem;
 
 *,
 *::before,
@@ -17,14 +20,54 @@ html {
 	height: 100vh;
 }
 
+.title,
+.geolocation-button{
+	border-radius:$border-radius;
+	box-shadow: $box-shadow;
+}
+
 .title {
-	background-color: rgba(255, 255, 255, 0.75);
+	background-color: $background-color;
 	font-size: 1rem;
 	font-family: $font-primary;
 	padding: 0.5rem 1.15rem;
-	border-radius: 0.5rem;
-	box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25);
+	
 }
+
+.geolocation-button{
+	position: absolute;
+	top: 3.75rem;
+	right: 10px;
+	z-index: 1000;
+	background-color: $background-color;
+	width: 2rem;
+	height: 2rem;
+	border: none;
+	color: inherit;
+	cursor: pointer;
+
+	@media (hover: hover) {
+		transition: transform 0.2s ease-in-out;
+
+		&:hover {
+			transform: scale(1.1);
+		}
+	}
+
+	&:disabled{
+		opacity: 0.75;
+		cursor: not-allowed;
+
+		@media (hover: hover) {
+			transition: none;
+	
+			&:hover {
+				transform: none;
+			}
+		}
+	}
+}
+
 
 .information {
 	font-family: $font-primary;
